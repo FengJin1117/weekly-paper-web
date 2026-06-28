@@ -7,7 +7,7 @@ const root = path.resolve(__dirname, "..");
 const dataDir = path.join(root, "data");
 const papersPath = path.join(dataDir, "papers.json");
 const statusPath = path.join(dataDir, "read-status.json");
-const port = Number(process.env.PORT || process.argv[2] || 8000);
+const preferredPort = Number(process.env.PORT || process.argv[2] || 8000);
 
 const contentTypes = {
   ".html": "text/html; charset=utf-8",
@@ -97,19 +97,38 @@ function serveStatic(req, res, pathname) {
   send(res, 200, fs.readFileSync(filePath), contentTypes[ext] || "application/octet-stream");
 }
 
-const server = http.createServer(async (req, res) => {
-  try {
-    const url = new URL(req.url, `http://${req.headers.host}`);
-    if (url.pathname.startsWith("/api/")) {
-      await handleApi(req, res, url.pathname);
+function createServer() {
+  return http.createServer(async (req, res) => {
+    try {
+      const url = new URL(req.url, `http://${req.headers.host}`);
+      if (url.pathname.startsWith("/api/")) {
+        await handleApi(req, res, url.pathname);
+        return;
+      }
+      serveStatic(req, res, url.pathname);
+    } catch (error) {
+      send(res, 500, error.message || "Internal server error");
+    }
+  });
+}
+
+function listen(port, attemptsLeft = 20) {
+  const server = createServer();
+
+  server.once("error", (error) => {
+    if (error.code === "EADDRINUSE" && attemptsLeft > 0) {
+      console.log(`Port ${port} is busy, trying ${port + 1}...`);
+      listen(port + 1, attemptsLeft - 1);
       return;
     }
-    serveStatic(req, res, url.pathname);
-  } catch (error) {
-    send(res, 500, error.message || "Internal server error");
-  }
-});
+    console.error(error.message);
+    process.exit(1);
+  });
 
-server.listen(port, "127.0.0.1", () => {
-  console.log(`weekly-paper-web local editor: http://127.0.0.1:${port}/`);
-});
+  server.listen(port, "127.0.0.1", () => {
+    console.log(`weekly-paper-web local editor: http://127.0.0.1:${port}/`);
+    console.log("Press Ctrl+C to stop.");
+  });
+}
+
+listen(preferredPort);
