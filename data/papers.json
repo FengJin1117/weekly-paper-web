@@ -1,0 +1,242 @@
+{
+  "generatedAt": "2026-06-28T13:58:42.149Z",
+  "title": "每周论文推荐",
+  "totals": {
+    "weeks": 2,
+    "papers": 18
+  },
+  "weeks": [
+    {
+      "date": "2026-06-18",
+      "title": "每周论文推荐：2026-06-18",
+      "source": "markdowns/weekly_paper_recommendation_2026-06-18.md",
+      "direction": "基于 GRPO 提升 Audio LLM 的 audio caption 能力（时序化建模）",
+      "keywords": [
+        "Audio LLM",
+        "GRPO",
+        "RLHF",
+        "Audio Caption",
+        "Temporal Modeling"
+      ],
+      "paperCount": 8,
+      "papers": [
+        {
+          "id": "2026-06-18-01-arxiv-org-abs-2605-27741",
+          "top": 1,
+          "title": "MAPO: Modality-Aware Policy Optimization for Audio Reasoning",
+          "link": "https://arxiv.org/abs/2605.27741",
+          "keywords": "Modality-Aware Policy Optimization, GRPO, Modality Collapse, Audio Reasoning",
+          "priority": "高",
+          "readingLevel": "精读",
+          "yearVenue": "2026-05-26 / arXiv",
+          "reason": "本文揭示了标准 GRPO 在 Audio LLM 后训练中的关键缺陷——uniform policy gradient 忽略了不同 token 对非文本源模态的依赖程度差异，导致后期推理中模态坍缩（modality collapse），模型逐渐抛弃音频信号转而依赖文本先验输出自信但无grounding的幻觉。MAPO 通过双分支框架解决：模态相关性 mask 动态聚焦梯度到模态关键 token + 辅助注意损失惩罚注意力分布以维持跨模态 grounding。"
+        },
+        {
+          "id": "2026-06-18-02-arxiv-org-abs-2606-13707",
+          "top": 2,
+          "title": "Orchestra-o1: Omnimodal Agent Orchestration with DA-GRPO",
+          "link": "https://arxiv.org/abs/2606.13707",
+          "keywords": "DA-GRPO, Omnimodal Agent, Agent Orchestration, Audio-Visual",
+          "priority": "高",
+          "readingLevel": "精读",
+          "yearVenue": "2026-06-10 / arXiv",
+          "reason": "提出 Decision-Aligned GRPO (DA-GRPO)，一种高效的 agentic 强化学习方法。Orchestra-o1 是全模态（文本+图像+音频+视频）agent 编排框架，通过 DA-GRPO 训练的 8B 模型在 OmniGAIA 基准上达到开源 SOTA。DA-GRPO 针对 agent 决策过程的 reward 设计思路值得参考。"
+        },
+        {
+          "id": "2026-06-18-03-arxiv-org-abs-2606-14591",
+          "top": 3,
+          "title": "AudioDER: A Deduplication-Enhanced Reasoning Dataset for Post-Training Large Audio-Language Models",
+          "link": "https://arxiv.org/abs/2606.14591",
+          "keywords": "LALM, Post-Training, Reasoning Dataset, Data Deduplication, CoT",
+          "priority": "高",
+          "readingLevel": "精读",
+          "yearVenue": "2026-06-12 / arXiv",
+          "reason": "本文构建了约 191k 样本的推理导向后训练数据集 AudioDER，覆盖声音、语音、音乐，每个样本包含音频 + 多选题 + CoT rationale。实验证明使用 AudioDER 后训练能持续提升 Qwen2-Audio-7B 在 MMAU-mini、MMSU、MMAR 等基准上的推理能力。关键是其冗余感知的数据构建流水线（声学相似度去重），这对您自己构建 caption 训练数据有直接参考价值。"
+        },
+        {
+          "id": "2026-06-18-04-arxiv-org-abs-2606-01802",
+          "top": 4,
+          "title": "MOSS-Audio: Unified Audio-Language Model for Speech, Sound, and Music",
+          "link": "https://arxiv.org/abs/2606.01802",
+          "keywords": "Audio-Language Model, Audio Captioning, Time-Aware QA, Timestamped Transcription, DeepStack",
+          "priority": "高",
+          "readingLevel": "精读",
+          "yearVenue": "2026-06-01 / arXiv (技术报告)",
+          "reason": "MOSS-Audio 是统一音频语言模型，支持 audio captioning + time-aware QA + timestamped ASR。两个核心技术亮点：(1) DeepStack 跨层特征注入，让 decoder 从多个编码器深度获取声学信息；(2) Time Markers 在音频 token 流中插入显式时间戳标记，实现时序 grounding。4B 和 8B 版本均有 Instruct 和 Thinking 两种配置。"
+        },
+        {
+          "id": "2026-06-18-05-arxiv-org-abs-2606-18988",
+          "top": 5,
+          "title": "ThinkDeception: VAC-GRPO for Multimodal Deception Detection",
+          "link": "https://arxiv.org/abs/2606.18988",
+          "keywords": "VAC-GRPO, Visual-Audio Consistency, Progressive Training, Multimodal CoT",
+          "priority": "中",
+          "readingLevel": "泛读",
+          "yearVenue": "2026-06-17 / arXiv (最新！)",
+          "reason": "提出 Visual-Audio Consistency GRPO (VAC-GRPO)，配备渐进式训练策略和分层难度数据（4 级），结合多维度 process-aware reward + 反思学习范式。虽然应用场景是欺骗检测，但其 VAC-GRPO 的跨模态一致性建模方法（同一时间窗内音频和视觉信号的一致性奖励）可以直接迁移到 audio caption 的时序跨模态对齐。"
+        },
+        {
+          "id": "2026-06-18-06-arxiv-org-abs-2603-01565",
+          "top": 6,
+          "title": "Investigating GRPO for Diffusion Transformer based Text-to-Audio Generation",
+          "link": "https://arxiv.org/abs/2603.01565",
+          "keywords": "GRPO, Text-to-Audio, Diffusion Transformer, Reward Design, CLAP",
+          "priority": "中",
+          "readingLevel": "泛读",
+          "yearVenue": "2026-03-02 / arXiv",
+          "reason": "系统实验了 GRPO 在 DiT-based T2A 生成中的应用，对比多种 reward 函数组合（CLAP、KL、FAD）的效果。虽然不是 audio caption 任务，但 reward 设计的系统性分析——哪些 reward 驱动 fidelity、哪些驱动 prompt adherence——对您的 caption reward 设计有直接参考价值。"
+        },
+        {
+          "id": "2026-06-18-07-arxiv-org-abs-2606-05889",
+          "top": 7,
+          "title": "GLASS: GRPO-Trained LoRA for Acoustic Style Steering in Zero-Shot TTS",
+          "link": "https://arxiv.org/abs/2606.05889",
+          "keywords": "GRPO, LoRA, Acoustic Style Control, Reward Design, Composable Adapters",
+          "priority": "中",
+          "readingLevel": "泛读",
+          "yearVenue": "2026-06-04 / arXiv",
+          "reason": "GLASS 用 GRPO 训练轻量 LoRA adapter 实现声学风格控制，每个控制轴（语速、音高）训练一个 LoRA，通过线性 LoRA 算术可组合、插值。虽然面向 TTS，但其 \"reward-defined control direction\" 思想和可组合 LoRA 设计对您的 caption 模型有启发——可以训练不同的 caption quality LoRA adapter（如时序准确性、语义覆盖度）动态组合。"
+        },
+        {
+          "id": "2026-06-18-08-arxiv-org-abs-2603-19195",
+          "top": 8,
+          "title": "How Auditory Knowledge in LLM Backbones Shapes Audio Language Models",
+          "link": "https://arxiv.org/abs/2603.19195",
+          "keywords": "LALM, LLM Backbone, Auditory Knowledge, Benchmark, Evaluation",
+          "priority": "低",
+          "readingLevel": "收藏",
+          "yearVenue": "2026-03-19 / arXiv",
+          "reason": "系统评估不同 LLM 家族在听觉知识上的差异（通过 AKB-2000 基准），并验证 text-only 听觉知识水平与音频端性能之间的强相关性。这对您选择 caption 模型的 LLM backbone 有指导意义——哪个 LLM 在听觉知识上先天更强。"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-08",
+      "title": "每周论文推荐：2026-06-08",
+      "source": "markdowns/weeky_paper_recommendation_2026-06-08.md",
+      "direction": "Audio LLM / GRPO / Audio Caption / 时序化建模",
+      "keywords": [
+        "GRPO",
+        "Auditory LLM",
+        "Few-shot",
+        "Post-training",
+        "RL",
+        "Audio-Visual Captioning",
+        "Reward Design"
+      ],
+      "paperCount": 10,
+      "papers": [
+        {
+          "id": "2026-06-08-01-arxiv-org-abs-2606-02615",
+          "top": 1,
+          "title": "FSA-GRPO: Teaching Auditory LLMs to Use Few-shot Demonstrations",
+          "link": "https://arxiv.org/abs/2606.02615",
+          "keywords": "GRPO, Auditory LLM, Few-shot, Post-training, RL",
+          "priority": "高",
+          "readingLevel": "精读",
+          "yearVenue": "2026 / Preprint",
+          "reason": "直接在 Auditory LLM 上应用 GRPO 的后训练方法。FSA-GRPO 设计了专门奖励函数鼓励模型利用 few-shot 示例，仅用高资源成人 ASR 数据训练即可泛化到儿童语音识别、语音翻译和音频理解。是 GRPO 在 Audio LLM 后训练中最新的方法论文。"
+        },
+        {
+          "id": "2026-06-08-02-arxiv-org-abs-2602-07960",
+          "top": 2,
+          "title": "D-ORCA: Dialogue-Centric Optimization for Robust Audio-Visual Captioning",
+          "link": "https://arxiv.org/abs/2602.07960",
+          "keywords": "GRPO, Audio-Visual Captioning, Reward Design, Temporal Grounding",
+          "priority": "高",
+          "readingLevel": "精读",
+          "yearVenue": "2026 / Preprint",
+          "reason": "首次将 GRPO 与三个新颖的奖励函数应用于音视频 captioning，评估说话人归属准确度、语音内容准确度和句子级时间边界对齐。这些奖励函数源自语音处理评估指标，首次作为 RL 目标用于音视频 captioning。8B 参数模型在多个基准上达到与 Qwen3-Omni 竞争的性能。"
+        },
+        {
+          "id": "2026-06-08-03-arxiv-org-abs-2602-15766",
+          "top": 3,
+          "title": "TAC: Timestamped Audio Captioning",
+          "link": "https://arxiv.org/abs/2602.15766",
+          "keywords": "Timestamped Audio Captioning, Temporal Grounding, LALM, Synthetic Data",
+          "priority": "高",
+          "readingLevel": "精读",
+          "yearVenue": "2026 / Preprint",
+          "reason": "直接解决 LALM 在复杂声学场景中时序不一致和幻觉问题。TAC 生成带时间戳的音频描述，合成数据管线构建多声混合训练。TAC→LLM 级联在 MMAU-Pro、MMSU 等 benchmark 上达到 SOTA。"
+        },
+        {
+          "id": "2026-06-08-04-arxiv-org-abs-2509-14659",
+          "top": 4,
+          "title": "Aligning Audio Captions with Human Preferences",
+          "link": "https://arxiv.org/abs/2509.14659",
+          "keywords": "RLHF, Audio Captioning, CLAP Reward Model, Preference Alignment",
+          "priority": "高",
+          "readingLevel": "精读",
+          "yearVenue": "2025 / Submitted to Interspeech 2026",
+          "reason": "首个将 RLHF 应用于 audio captioning 的框架。训练基于 CLAP 的奖励模型使用人工标注的成对偏好数据，RL 微调任何 baseline captioning 系统而无需 ground-truth 标注。人类评估显示生成的 caption 在正确性和自然性上均优于 baseline。"
+        },
+        {
+          "id": "2026-06-08-05-arxiv-org-abs-2601-04658",
+          "top": 5,
+          "title": "LAMB: LLM-based Audio Captioning with Modality Gap Bridging via Cauchy-Schwarz Divergence",
+          "link": "https://arxiv.org/abs/2601.04658",
+          "keywords": "LLM-based Audio Captioning, Cross-Modal Alignment, AudioCaps SOTA",
+          "priority": "高",
+          "readingLevel": "精读",
+          "yearVenue": "2026 / ICASSP 2026",
+          "reason": "ICASSP 2026 论文。通过 Cauchy-Schwarz 散度最小化跨模态对齐，设计 Two-Stream Adapter 和 Token Guide，在 AudioCaps 上达到 SOTA。展示了 LLM decoder + 跨模态对齐的有效路径。"
+        },
+        {
+          "id": "2026-06-08-06-arxiv-org-abs-2606-06828",
+          "top": 6,
+          "title": "AdaGRPO: A Capability-Aware Adaptive Enhancement for Flow-based GRPO",
+          "link": "https://arxiv.org/abs/2606.06828",
+          "keywords": "GRPO, Adaptive, Curriculum, Advantage Fusion",
+          "priority": "中",
+          "readingLevel": "泛读",
+          "yearVenue": "2026 / Preprint",
+          "reason": "GRPO 算法本身的重要改进。提出在线课程过滤策略和跨层优势融合，解决 GRPO 学习与模型当前能力解耦的问题。作为即插即用模块，可与现有 GRPO 框架无缝集成。"
+        },
+        {
+          "id": "2026-06-08-07-arxiv-org-abs-2602-08711",
+          "top": 7,
+          "title": "TimeChat-Captioner: Scripting Multi-Scene Videos with Time-Aware and Structural Audio-Visual Captions",
+          "link": "https://arxiv.org/abs/2602.08711",
+          "keywords": "GRPO, Dense Captioning, Temporal, Audio-Visual, SFT+GRPO",
+          "priority": "高",
+          "readingLevel": "精读",
+          "yearVenue": "2026 / Preprint",
+          "reason": "提出 Omni Dense Captioning 任务，使用六维结构化 schema 生成\"剧本式\"描述。训练流程为 SFT + GRPO with task-specific rewards，超越 Gemini-2.5-Pro，下游显著提升音视频推理和时间定位能力。"
+        },
+        {
+          "id": "2026-06-08-08-arxiv-org-abs-2601-16483",
+          "top": 8,
+          "title": "FlowSE-GRPO: Training Flow Matching Speech Enhancement via Online Reinforcement Learning",
+          "link": "https://arxiv.org/abs/2601.16483",
+          "keywords": "GRPO, Flow Matching, Speech Enhancement, Multi-Metric Reward",
+          "priority": "中",
+          "readingLevel": "泛读",
+          "yearVenue": "2026 / ICASSP 2026",
+          "reason": "ICASSP 2026。首次将在线 GRPO 成功整合到 flow-matching 语音增强框架。提出多指标奖励优化策略平衡竞争目标，缓解 reward hacking。"
+        },
+        {
+          "id": "2026-06-08-09-arxiv-org-abs-2512-10403",
+          "top": 9,
+          "title": "BRACE: A Benchmark for Robust Audio Caption Quality Evaluation",
+          "link": "https://arxiv.org/abs/2512.10403",
+          "keywords": "Audio Caption Evaluation, CLAPScore, Hallucination Detection",
+          "priority": "中",
+          "readingLevel": "收藏",
+          "yearVenue": "2025 / Preprint",
+          "reason": "专门评估 audio caption 质量的 benchmark。包含幻觉检测子基准，揭示 CLAPScore 在 caption 评估中的局限性。最佳 CLAP-based 评估仅 70.01 F1，LALM 仅 63.19。"
+        },
+        {
+          "id": "2026-06-08-10-arxiv-org-abs-2606-06907",
+          "top": 10,
+          "title": "SpectCount: Spectrotemporal Counting via Synthetic Signals Improves Large Audio Language Models",
+          "link": "https://arxiv.org/abs/2606.06907",
+          "keywords": "LALM, Synthetic Data, Fine-grained Perception, Data-efficient",
+          "priority": "中",
+          "readingLevel": "收藏",
+          "yearVenue": "2026 / Preprint",
+          "reason": "通过合成信号发现和修复 LALM 的时频感知弱点，无需真实音频或标注。SpectCount 不仅解决观察到的弱点，还在音效/音乐/语音 benchmark 上泛化提升。"
+        }
+      ]
+    }
+  ]
+}

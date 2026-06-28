@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>每周论文推荐</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header compact">
+      <div class="wrap">
+        <a class="back-link" href="index.html">返回首页</a>
+        <p class="eyebrow">Weekly Detail</p>
+        <h1 id="weekTitle">每周论文推荐</h1>
+        <p id="weekLead" class="lead">正在载入数据...</p>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="detail-meta" aria-label="本周统计">
+        <div>
+          <span id="weekReadCount" class="stat-number">0</span>
+          <span class="stat-label">已阅读</span>
+        </div>
+        <div>
+          <span id="weekPaperCount" class="stat-number">0</span>
+          <span class="stat-label">推荐论文</span>
+        </div>
+        <div class="progress-wrap">
+          <span class="stat-label">阅读进程</span>
+          <div class="progress-track">
+            <span id="weekProgress" class="progress-bar"></span>
+          </div>
+        </div>
+      </section>
+
+      <section id="paperList" class="paper-list" aria-live="polite"></section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>每周论文推荐</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-grid">
+        <div>
+          <p class="eyebrow">Weekly Paper Web</p>
+          <h1>每周论文推荐</h1>
+          <p class="lead">面向 Audio LLM、GRPO、Audio Caption 与时序建模方向的论文阅读清单。</p>
+        </div>
+        <div class="stats-panel" aria-label="阅读统计">
+          <div>
+            <span id="readCount" class="stat-number">0</span>
+            <span class="stat-label">已阅读论文</span>
+          </div>
+          <div>
+            <span id="paperCount" class="stat-number">0</span>
+            <span class="stat-label">推荐论文</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap main-grid">
+      <section class="toolbar" aria-label="列表工具">
+        <div>
+          <h2>每周论文 HTML 链接</h2>
+          <p id="weekSummary">正在载入数据...</p>
+        </div>
+        <div class="segmented" role="group" aria-label="排序方式">
+          <button id="sortDesc" class="active" type="button">新的在上</button>
+          <button id="sortAsc" type="button">旧的在上</button>
+        </div>
+      </section>
+
+      <section id="weekList" class="week-list" aria-live="polite"></section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
