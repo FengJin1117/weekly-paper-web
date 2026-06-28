@@ -19,6 +19,7 @@ function cleanMarkdown(value) {
   return (value || "")
     .replace(/\*\*/g, "")
     .replace(/`/g, "")
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -34,21 +35,28 @@ function slugify(value) {
 
 function getField(block, name) {
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const pattern = new RegExp(`^-\\s*(?:\\*\\*)?${escaped}(?:：|:)\\s*(?:\\*\\*)?\\s*(.+)$`, "im");
+  const pattern = new RegExp(`^-\\s*(?:\\*\\*)?${escaped}\\s*(?:：|:)\\s*(?:\\*\\*)?\\s*(.+)$`, "im");
   const match = block.match(pattern);
   return match ? cleanMarkdown(match[1]) : "";
 }
 
+function getLink(block) {
+  const raw = getField(block, "链接");
+  const markdownLink = block.match(/链接\s*(?:：|:)\s*\[[^\]]+\]\((https?:\/\/[^)]+)\)/i);
+  const plainLink = block.match(/链接\s*(?:：|:)\s*(https?:\/\/\S+)/i);
+  return markdownLink?.[1] || plainLink?.[1] || raw;
+}
+
 function parseRecommendation(block) {
-  const priorityLine = block.match(/推荐优先级(?:：|:)\s*(?:\*\*)?([^*\n|]+)/i);
-  const readingLine = block.match(/建议(?:阅读级别)?(?:：|:)\s*(?:\*\*)?([^*\n|（(]+)/i);
+  const priorityLine = block.match(/推荐优先级\s*(?:：|:)\s*(?:\*\*)?([^*\n|]+)/i);
+  const readingLine = block.match(/建议(?:阅读级别)?\s*(?:：|:)\s*(?:\*\*)?([^*\n|（(]+)/i);
 
   return {
-    link: getField(block, "链接"),
+    link: getLink(block),
     keywords: getField(block, "关键词"),
     priority: priorityLine ? cleanMarkdown(priorityLine[1]) : "",
     readingLevel: readingLine ? cleanMarkdown(readingLine[1]) : "",
-    yearVenue: getField(block, "年份 / 会议") || getField(block, "年份 / 会议："),
+    yearVenue: getField(block, "年份 / 会议") || getField(block, "年份/会议"),
     reason: getField(block, "推荐理由"),
   };
 }
@@ -63,10 +71,12 @@ function parseMarkdown(fileName) {
 
   const date = dateMatch[1];
   const titleMatch = content.match(/^#\s+(.+)$/m);
-  const weekKeywordsMatch = content.match(/^>\s*关键词(?:：|:)\s*(.+)$/m);
-  const directionMatch = content.match(/^>\s*(?:研究方向|本周方向)(?:：|:)\s*(.+)$/m);
+  const weekKeywordsMatch = content.match(/^>\s*关键词\s*(?:：|:)\s*(.+)$/m);
+  const directionMatch =
+    content.match(/^>\s*(?:研究方向|本周方向)\s*(?:：|:)\s*(.+)$/m) ||
+    content.match(/^(?:本周重点|本周方向)[^\n]+$/m);
 
-  const headingPattern = /^##\s+Top\s+(\d+)\.\s+(.+)$/gm;
+  const headingPattern = /^##\s+(?:Top\s+)?(\d+)\.\s+(.+)$/gm;
   const headings = [];
   let heading;
   while ((heading = headingPattern.exec(content)) !== null) {
@@ -104,11 +114,36 @@ function parseMarkdown(fileName) {
     date,
     title: titleMatch ? cleanMarkdown(titleMatch[1]) : `每周论文推荐：${date}`,
     source: `markdowns/${fileName}`,
-    direction: directionMatch ? cleanMarkdown(directionMatch[1]) : "",
+    direction: directionMatch ? cleanMarkdown(directionMatch[0]) : "",
     keywords: Array.from(keywordSet),
     paperCount: papers.length,
     papers,
   };
+}
+
+function filePreference(fileName) {
+  if (/^weekly_paper_recommendation_/i.test(fileName)) {
+    return 3;
+  }
+  if (/^weeky_paper_recommendation_/i.test(fileName)) {
+    return 1;
+  }
+  return 2;
+}
+
+function selectMarkdownFiles(files) {
+  const byDate = new Map();
+  for (const fileName of files) {
+    const date = fileName.match(/(\d{4}-\d{2}-\d{2})/)?.[1];
+    if (!date) {
+      continue;
+    }
+    const current = byDate.get(date);
+    if (!current || filePreference(fileName) > filePreference(current)) {
+      byDate.set(date, fileName);
+    }
+  }
+  return Array.from(byDate.values()).sort();
 }
 
 function loadReadStatus() {
@@ -125,10 +160,12 @@ function writeJson(filePath, value) {
 function main() {
   ensureDir(dataDir);
 
-  const files = fs
-    .readdirSync(markdownDir)
-    .filter((file) => /\.md$/i.test(file))
-    .sort();
+  const files = selectMarkdownFiles(
+    fs
+      .readdirSync(markdownDir)
+      .filter((file) => /\.md$/i.test(file))
+      .sort(),
+  );
 
   const weeks = files.map(parseMarkdown).sort((a, b) => b.date.localeCompare(a.date));
   const allPapers = weeks.flatMap((week) => week.papers.map((paper) => ({ weekDate: week.date, ...paper })));
@@ -164,6 +201,7 @@ function main() {
   writeJson(readStatusPath, readStatus);
 
   console.log(`Generated ${weeks.length} weeks and ${allPapers.length} papers.`);
+  console.log(`Using markdown files: ${files.join(", ")}`);
 }
 
 main();
