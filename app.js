@@ -40,16 +40,20 @@ function progressPercent(read, total) {
   return total ? Math.round((read / total) * 100) : 0;
 }
 
+function allPapers() {
+  return state.data.weeks.flatMap((week) => week.papers.map((paper) => ({ ...paper, weekDate: week.date })));
+}
+
 function renderIndex() {
   const weekList = document.getElementById("weekList");
   if (!weekList) {
     return;
   }
 
-  const allPapers = state.data.weeks.flatMap((week) => week.papers);
-  const readTotal = countRead(allPapers);
+  const papers = allPapers();
+  const readTotal = countRead(papers);
   setText("readCount", readTotal);
-  setText("paperCount", allPapers.length);
+  setText("paperCount", papers.length);
   setText("weekSummary", `${state.data.weeks.length} 期推荐，最新数据生成于 ${new Date(state.data.generatedAt).toLocaleString("zh-CN")}`);
 
   const weeks = [...state.data.weeks].sort((a, b) => {
@@ -122,14 +126,18 @@ function renderDetail() {
 
   paperList.innerHTML = week.papers
     .map((paper) => {
-      const readClass = isRead(paper.id) ? "read" : "unread";
-      const statusText = isRead(paper.id) ? "已读" : "未读";
+      const read = isRead(paper.id);
+      const readClass = read ? "read" : "unread";
+      const statusText = read ? "已阅读" : "标记已读";
+      const buttonTitle = read ? "点击撤销已读状态" : "点击标记为已读";
       const meta = [paper.priority && `优先级：${paper.priority}`, paper.readingLevel && `建议：${paper.readingLevel}`]
         .filter(Boolean)
         .join(" · ");
       return `
-        <article class="paper-card ${readClass}">
-          <div class="paper-status">${statusText}</div>
+        <article class="paper-card ${readClass}" data-paper-id="${escapeAttribute(paper.id)}">
+          <button class="paper-status" type="button" data-read-toggle="${escapeAttribute(paper.id)}" aria-pressed="${read}" title="${buttonTitle}">
+            ${statusText}
+          </button>
           <div class="paper-body">
             <p class="paper-id">${escapeHtml(paper.id)}</p>
             <h2>Top ${paper.top}. ${escapeHtml(paper.title)}</h2>
@@ -142,6 +150,48 @@ function renderDetail() {
       `;
     })
     .join("");
+}
+
+async function toggleReadStatus(paperId) {
+  const previous = isRead(paperId);
+  const next = !previous;
+  state.readStatus.papers[paperId] = next;
+  renderIndex();
+  renderDetail();
+
+  try {
+    const response = await fetch("api/read-status", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ paperId, read: next }),
+    });
+    if (!response.ok) {
+      throw new Error(await response.text());
+    }
+    const updated = await response.json();
+    state.readStatus = updated;
+    renderIndex();
+    renderDetail();
+  } catch (error) {
+    state.readStatus.papers[paperId] = previous;
+    renderIndex();
+    renderDetail();
+    alert(`无法保存阅读状态。\n\n请使用本地服务启动页面：node scripts/serve-local.js\n\n${error.message}`);
+  }
+}
+
+function bindDetailActions() {
+  const paperList = document.getElementById("paperList");
+  if (!paperList) {
+    return;
+  }
+  paperList.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-read-toggle]");
+    if (!button) {
+      return;
+    }
+    toggleReadStatus(button.dataset.readToggle);
+  });
 }
 
 function escapeHtml(value) {
@@ -162,6 +212,7 @@ async function init() {
     const [data, readStatus] = await Promise.all([loadJson("data/papers.json"), loadJson("data/read-status.json")]);
     state.data = data;
     state.readStatus = readStatus;
+    state.readStatus.papers = state.readStatus.papers || {};
 
     document.getElementById("sortDesc")?.addEventListener("click", () => {
       state.sort = "desc";
@@ -171,6 +222,7 @@ async function init() {
       state.sort = "asc";
       renderIndex();
     });
+    bindDetailActions();
 
     renderIndex();
     renderDetail();

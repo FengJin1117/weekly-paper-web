@@ -1,32 +1,14 @@
 # 每周论文推荐
 
-`weekly-paper-web` 是一个用于整理和展示每周论文推荐的 GitHub Pages 静态网页。当前论文来源放在 `markdowns/`，站点会自动解析每周 Markdown，生成首页卡片、每周详情页、论文统计和全局阅读进度。
+`weekly-paper-web` 是一个用于整理和展示每周论文推荐的 GitHub Pages 静态网页。论文来源放在 `markdowns/`，站点会自动解析每周 Markdown，生成首页卡片、每周详情页、论文统计和全局阅读进度。
 
 ## 功能
 
 - 首页显示自动统计的已阅读论文数、推荐论文总数和每周推荐入口。
 - 每周推荐以长方块卡片展示，包含关键词、推荐论文数和阅读进程。
 - 支持按时间正序或倒序浏览，默认最新一期在上。
-- 每篇论文显示全局已读/未读状态：已读为绿色，未读为灰色。
+- 每篇论文可以点击“标记已读 / 已阅读”切换状态，已读为绿色，未读为灰色。
 - 阅读状态保存在仓库文件 `data/read-status.json`，适合单人维护并通过 GitHub 同步。
-
-## 目录结构
-
-```text
-.
-├── index.html                 # 首页
-├── week.html                  # 每周详情页
-├── app.js                     # 页面数据加载和渲染逻辑
-├── styles.css                 # 简约学术风格样式
-├── markdowns/                 # 每周论文推荐 Markdown
-├── data/
-│   ├── papers.json            # 自动生成的论文数据
-│   └── read-status.json       # 全局阅读状态
-├── scripts/
-│   ├── generate-site.js       # 从 markdowns 生成站点数据
-│   └── mark-read.js           # 标记论文已读/未读
-└── .github/workflows/pages.yml
-```
 
 ## 本地使用
 
@@ -36,15 +18,24 @@
 node scripts/generate-site.js
 ```
 
-查看所有论文 id：
+启动可写入阅读状态的本地网页：
+
+```bash
+node scripts/serve-local.js
+```
+
+然后打开：
+
+```text
+http://127.0.0.1:8000/
+```
+
+在每周详情页点击论文左侧的“标记已读”即可写入 `data/read-status.json`；再次点击“已阅读”可以撤销。
+
+也可以用命令行维护阅读状态：
 
 ```bash
 node scripts/mark-read.js list
-```
-
-标记已读、未读或切换状态：
-
-```bash
 node scripts/mark-read.js read <paper-id>
 node scripts/mark-read.js unread <paper-id>
 node scripts/mark-read.js toggle <paper-id>
@@ -64,6 +55,25 @@ git push
 2. 每篇论文使用 `## Top N. Paper Title` 作为标题。
 3. 推荐填写 `链接`、`关键词`、`推荐优先级`、`建议` 等字段。
 4. 运行 `node scripts/generate-site.js` 重新生成数据。
+
+## 目录结构
+
+```text
+.
+├── index.html
+├── week.html
+├── app.js
+├── styles.css
+├── markdowns/
+├── data/
+│   ├── papers.json
+│   └── read-status.json
+├── scripts/
+│   ├── generate-site.js
+│   ├── mark-read.js
+│   └── serve-local.js
+└── .github/workflows/pages.yml
+```
 
 ## 发布 GitHub Pages
 
