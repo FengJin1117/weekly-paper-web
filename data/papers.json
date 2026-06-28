@@ -1,11 +1,96 @@
 {
-  "generatedAt": "2026-06-28T15:22:03.671Z",
+  "generatedAt": "2026-06-28T15:30:12.451Z",
   "title": "每周论文推荐",
   "totals": {
-    "weeks": 3,
-    "papers": 22
+    "weeks": 4,
+    "papers": 32
   },
   "weeks": [
+    {
+      "date": "2026-06-28",
+      "title": "每周论文推荐：2026-06-28",
+      "source": "markdowns/weekly_paper_recommendation_2026-06-28.md",
+      "direction": "本周重点补齐了上一轮未覆盖、且未出现在 D:\\projects\\remotion\\recommended_papers.jsonl 中的高相关论文，优先看 audio/video caption + temporal modeling + Audio LLM/post-training 的交叉区域。",
+      "keywords": [
+        "video caption",
+        "temporal orchestration",
+        "audiovisual LLM",
+        "long-context",
+        "caption planning",
+        "Audio LLM",
+        "TimeAudio",
+        "temporal modeling"
+      ],
+      "paperCount": 6,
+      "papers": [
+        {
+          "id": "2026-06-28-01-arxiv-org-abs-2510-10395",
+          "top": 1,
+          "title": "AVoCaDO: An Audiovisual Video Captioner Driven by Temporal Orchestration",
+          "link": "https://arxiv.org/abs/2510.10395",
+          "keywords": "video caption, temporal orchestration, audiovisual LLM, long-context, caption planning",
+          "priority": "A",
+          "readingLevel": "精读",
+          "yearVenue": "2025 / arXiv",
+          "reason": "这篇工作直接把“按时间组织描述”作为核心设计点，不是只做普通 caption 解码。虽然任务是视频 caption，但方法上非常接近你要的“时序化 audio caption”。"
+        },
+        {
+          "id": "2026-06-28-02-ojs-aaai-org-index-php-aaai-article-view-39827",
+          "top": 2,
+          "title": "Listening Between the Frames: Bridging Temporal Gaps in Large Audio-Language Models",
+          "link": "https://ojs.aaai.org/index.php/AAAI/article/view/39827",
+          "keywords": "Audio LLM, TimeAudio, temporal modeling, long audio, timestamp reasoning, structured understanding",
+          "priority": "A",
+          "readingLevel": "精读",
+          "yearVenue": "2026 / AAAI 2026",
+          "reason": "这篇论文提出的方法名就是 TimeAudio。标题和任务设定都直指 Audio LLM 的 temporal gap，是本轮最贴近“时序建模短板”本身的一篇。"
+        },
+        {
+          "id": "2026-06-28-03-arxiv-org-abs-2604-22245",
+          "top": 3,
+          "title": "Listening with Time: Temporally Informed Prompting Improves Spatial Audio Understanding",
+          "link": "https://arxiv.org/abs/2604.22245",
+          "keywords": "temporal prompting, spatial audio understanding, Audio LLM, prompt engineering, temporal cues",
+          "priority": "A-",
+          "readingLevel": "精读",
+          "yearVenue": "2026 / arXiv",
+          "reason": "它不是 caption 论文，但核心价值在于证明“显式时间信息注入”本身能显著改变模型对音频场景的理解质量。"
+        },
+        {
+          "id": "2026-06-28-04-arxiv-org-abs-2503-03983",
+          "top": 4,
+          "title": "Audio Flamingo 2: An Audio-Language Model with Long-Audio Understanding and Expert Reasoning Abilities",
+          "link": "https://arxiv.org/abs/2503.03983",
+          "keywords": "Audio LLM, long-audio understanding, reasoning, instruction tuning, multi-task post-training",
+          "priority": "B+",
+          "readingLevel": "泛读",
+          "yearVenue": "2025 / arXiv",
+          "reason": "这篇更偏通用 Audio LLM 能力，但它把长音频理解和 expert reasoning 放到了同一个系统里，适合作为后训练与任务迁移基线。"
+        },
+        {
+          "id": "2026-06-28-05-arxiv-org-abs-2506-12935",
+          "top": 5,
+          "title": "SoundMind: RL-Incentivized Logic Reasoning for Audio-Language Models",
+          "link": "https://arxiv.org/abs/2506.12935",
+          "keywords": "Audio LLM, reinforcement learning, reasoning, verifier, post-training",
+          "priority": "B+",
+          "readingLevel": "精读",
+          "yearVenue": "2025 / EMNLP 2025 Findings",
+          "reason": "这篇不是 caption 任务，但它是少见把 RL 明确用到 Audio-Language reasoning 提升上的工作，方法迁移价值高。"
+        },
+        {
+          "id": "2026-06-28-06-openreview-net-forum-id-aggxxpmvb2",
+          "top": 6,
+          "title": "CLAIR-A: Leveraging Large Language Models to Judge Audio Captions",
+          "link": "https://openreview.net/forum?id=AGgxxPMvB2",
+          "keywords": "audio caption evaluation, LLM-as-a-judge, reward modeling, caption quality",
+          "priority": "B+",
+          "readingLevel": "精读",
+          "yearVenue": "2024 / OpenReview",
+          "reason": "它最直接回答“caption 好坏怎么评”这个问题。对你后续做 GRPO/reward shaping，这比单看生成模型本身更关键。"
+        }
+      ]
+    },
     {
       "date": "2026-06-18",
       "title": "每周论文推荐：2026-06-18",
@@ -220,84 +305,127 @@
       "date": "2026-06-08",
       "title": "每周论文推荐：2026-06-08",
       "source": "markdowns/weekly_paper_recommendation_2026-06-08.md",
-      "direction": "本周重点补齐了上一轮未覆盖、且未出现在 D:\\projects\\remotion\\recommended_papers.jsonl 中的高相关论文，优先看 audio/video caption + temporal modeling + Audio LLM/post-training 的交叉区域。",
+      "direction": "> 本周方向：Audio LLM / GRPO / Audio Caption / 时序化建模",
       "keywords": [
-        "video caption",
-        "temporal orchestration",
-        "audiovisual LLM",
-        "long-context",
-        "caption planning",
-        "Audio LLM",
-        "TimeAudio",
-        "temporal modeling"
+        "GRPO",
+        "Auditory LLM",
+        "Few-shot",
+        "Post-training",
+        "RL",
+        "Audio-Visual Captioning",
+        "Reward Design"
       ],
-      "paperCount": 6,
+      "paperCount": 10,
       "papers": [
         {
-          "id": "2026-06-08-01-arxiv-org-abs-2510-10395",
+          "id": "2026-06-08-01-arxiv-org-abs-2606-02615",
           "top": 1,
-          "title": "AVoCaDO: An Audiovisual Video Captioner Driven by Temporal Orchestration",
-          "link": "https://arxiv.org/abs/2510.10395",
-          "keywords": "video caption, temporal orchestration, audiovisual LLM, long-context, caption planning",
-          "priority": "A",
+          "title": "FSA-GRPO: Teaching Auditory LLMs to Use Few-shot Demonstrations",
+          "link": "https://arxiv.org/abs/2606.02615",
+          "keywords": "GRPO, Auditory LLM, Few-shot, Post-training, RL",
+          "priority": "高",
           "readingLevel": "精读",
-          "yearVenue": "2025 / arXiv",
-          "reason": "这篇工作直接把“按时间组织描述”作为核心设计点，不是只做普通 caption 解码。虽然任务是视频 caption，但方法上非常接近你要的“时序化 audio caption”。"
+          "yearVenue": "2026 / Preprint",
+          "reason": "直接在 Auditory LLM 上应用 GRPO 的后训练方法。FSA-GRPO 设计了专门奖励函数鼓励模型利用 few-shot 示例，仅用高资源成人 ASR 数据训练即可泛化到儿童语音识别、语音翻译和音频理解。是 GRPO 在 Audio LLM 后训练中最新的方法论文。"
         },
         {
-          "id": "2026-06-08-02-ojs-aaai-org-index-php-aaai-article-view-39827",
+          "id": "2026-06-08-02-arxiv-org-abs-2602-07960",
           "top": 2,
-          "title": "Listening Between the Frames: Bridging Temporal Gaps in Large Audio-Language Models",
-          "link": "https://ojs.aaai.org/index.php/AAAI/article/view/39827",
-          "keywords": "Audio LLM, TimeAudio, temporal modeling, long audio, timestamp reasoning, structured understanding",
-          "priority": "A",
+          "title": "D-ORCA: Dialogue-Centric Optimization for Robust Audio-Visual Captioning",
+          "link": "https://arxiv.org/abs/2602.07960",
+          "keywords": "GRPO, Audio-Visual Captioning, Reward Design, Temporal Grounding",
+          "priority": "高",
           "readingLevel": "精读",
-          "yearVenue": "2026 / AAAI 2026",
-          "reason": "这篇论文提出的方法名就是 TimeAudio。标题和任务设定都直指 Audio LLM 的 temporal gap，是本轮最贴近“时序建模短板”本身的一篇。"
+          "yearVenue": "2026 / Preprint",
+          "reason": "首次将 GRPO 与三个新颖的奖励函数应用于音视频 captioning，评估说话人归属准确度、语音内容准确度和句子级时间边界对齐。这些奖励函数源自语音处理评估指标，首次作为 RL 目标用于音视频 captioning。8B 参数模型在多个基准上达到与 Qwen3-Omni 竞争的性能。"
         },
         {
-          "id": "2026-06-08-03-arxiv-org-abs-2604-22245",
+          "id": "2026-06-08-03-arxiv-org-abs-2602-15766",
           "top": 3,
-          "title": "Listening with Time: Temporally Informed Prompting Improves Spatial Audio Understanding",
-          "link": "https://arxiv.org/abs/2604.22245",
-          "keywords": "temporal prompting, spatial audio understanding, Audio LLM, prompt engineering, temporal cues",
-          "priority": "A-",
+          "title": "TAC: Timestamped Audio Captioning",
+          "link": "https://arxiv.org/abs/2602.15766",
+          "keywords": "Timestamped Audio Captioning, Temporal Grounding, LALM, Synthetic Data",
+          "priority": "高",
           "readingLevel": "精读",
-          "yearVenue": "2026 / arXiv",
-          "reason": "它不是 caption 论文，但核心价值在于证明“显式时间信息注入”本身能显著改变模型对音频场景的理解质量。"
+          "yearVenue": "2026 / Preprint",
+          "reason": "直接解决 LALM 在复杂声学场景中时序不一致和幻觉问题。TAC 生成带时间戳的音频描述，合成数据管线构建多声混合训练。TAC→LLM 级联在 MMAU-Pro、MMSU 等 benchmark 上达到 SOTA。"
         },
         {
-          "id": "2026-06-08-04-arxiv-org-abs-2503-03983",
+          "id": "2026-06-08-04-arxiv-org-abs-2509-14659",
           "top": 4,
-          "title": "Audio Flamingo 2: An Audio-Language Model with Long-Audio Understanding and Expert Reasoning Abilities",
-          "link": "https://arxiv.org/abs/2503.03983",
-          "keywords": "Audio LLM, long-audio understanding, reasoning, instruction tuning, multi-task post-training",
-          "priority": "B+",
-          "readingLevel": "泛读",
-          "yearVenue": "2025 / arXiv",
-          "reason": "这篇更偏通用 Audio LLM 能力，但它把长音频理解和 expert reasoning 放到了同一个系统里，适合作为后训练与任务迁移基线。"
+          "title": "Aligning Audio Captions with Human Preferences",
+          "link": "https://arxiv.org/abs/2509.14659",
+          "keywords": "RLHF, Audio Captioning, CLAP Reward Model, Preference Alignment",
+          "priority": "高",
+          "readingLevel": "精读",
+          "yearVenue": "2025 / Submitted to Interspeech 2026",
+          "reason": "首个将 RLHF 应用于 audio captioning 的框架。训练基于 CLAP 的奖励模型使用人工标注的成对偏好数据，RL 微调任何 baseline captioning 系统而无需 ground-truth 标注。人类评估显示生成的 caption 在正确性和自然性上均优于 baseline。"
         },
         {
-          "id": "2026-06-08-05-arxiv-org-abs-2506-12935",
+          "id": "2026-06-08-05-arxiv-org-abs-2601-04658",
           "top": 5,
-          "title": "SoundMind: RL-Incentivized Logic Reasoning for Audio-Language Models",
-          "link": "https://arxiv.org/abs/2506.12935",
-          "keywords": "Audio LLM, reinforcement learning, reasoning, verifier, post-training",
-          "priority": "B+",
+          "title": "LAMB: LLM-based Audio Captioning with Modality Gap Bridging via Cauchy-Schwarz Divergence",
+          "link": "https://arxiv.org/abs/2601.04658",
+          "keywords": "LLM-based Audio Captioning, Cross-Modal Alignment, AudioCaps SOTA",
+          "priority": "高",
           "readingLevel": "精读",
-          "yearVenue": "2025 / EMNLP 2025 Findings",
-          "reason": "这篇不是 caption 任务，但它是少见把 RL 明确用到 Audio-Language reasoning 提升上的工作，方法迁移价值高。"
+          "yearVenue": "2026 / ICASSP 2026",
+          "reason": "ICASSP 2026 论文。通过 Cauchy-Schwarz 散度最小化跨模态对齐，设计 Two-Stream Adapter 和 Token Guide，在 AudioCaps 上达到 SOTA。展示了 LLM decoder + 跨模态对齐的有效路径。"
         },
         {
-          "id": "2026-06-08-06-openreview-net-forum-id-aggxxpmvb2",
+          "id": "2026-06-08-06-arxiv-org-abs-2606-06828",
           "top": 6,
-          "title": "CLAIR-A: Leveraging Large Language Models to Judge Audio Captions",
-          "link": "https://openreview.net/forum?id=AGgxxPMvB2",
-          "keywords": "audio caption evaluation, LLM-as-a-judge, reward modeling, caption quality",
-          "priority": "B+",
+          "title": "AdaGRPO: A Capability-Aware Adaptive Enhancement for Flow-based GRPO",
+          "link": "https://arxiv.org/abs/2606.06828",
+          "keywords": "GRPO, Adaptive, Curriculum, Advantage Fusion",
+          "priority": "中",
+          "readingLevel": "泛读",
+          "yearVenue": "2026 / Preprint",
+          "reason": "GRPO 算法本身的重要改进。提出在线课程过滤策略和跨层优势融合，解决 GRPO 学习与模型当前能力解耦的问题。作为即插即用模块，可与现有 GRPO 框架无缝集成。"
+        },
+        {
+          "id": "2026-06-08-07-arxiv-org-abs-2602-08711",
+          "top": 7,
+          "title": "TimeChat-Captioner: Scripting Multi-Scene Videos with Time-Aware and Structural Audio-Visual Captions",
+          "link": "https://arxiv.org/abs/2602.08711",
+          "keywords": "GRPO, Dense Captioning, Temporal, Audio-Visual, SFT+GRPO",
+          "priority": "高",
           "readingLevel": "精读",
-          "yearVenue": "2024 / OpenReview",
-          "reason": "它最直接回答“caption 好坏怎么评”这个问题。对你后续做 GRPO/reward shaping，这比单看生成模型本身更关键。"
+          "yearVenue": "2026 / Preprint",
+          "reason": "提出 Omni Dense Captioning 任务，使用六维结构化 schema 生成\"剧本式\"描述。训练流程为 SFT + GRPO with task-specific rewards，超越 Gemini-2.5-Pro，下游显著提升音视频推理和时间定位能力。"
+        },
+        {
+          "id": "2026-06-08-08-arxiv-org-abs-2601-16483",
+          "top": 8,
+          "title": "FlowSE-GRPO: Training Flow Matching Speech Enhancement via Online Reinforcement Learning",
+          "link": "https://arxiv.org/abs/2601.16483",
+          "keywords": "GRPO, Flow Matching, Speech Enhancement, Multi-Metric Reward",
+          "priority": "中",
+          "readingLevel": "泛读",
+          "yearVenue": "2026 / ICASSP 2026",
+          "reason": "ICASSP 2026。首次将在线 GRPO 成功整合到 flow-matching 语音增强框架。提出多指标奖励优化策略平衡竞争目标，缓解 reward hacking。"
+        },
+        {
+          "id": "2026-06-08-09-arxiv-org-abs-2512-10403",
+          "top": 9,
+          "title": "BRACE: A Benchmark for Robust Audio Caption Quality Evaluation",
+          "link": "https://arxiv.org/abs/2512.10403",
+          "keywords": "Audio Caption Evaluation, CLAPScore, Hallucination Detection",
+          "priority": "中",
+          "readingLevel": "收藏",
+          "yearVenue": "2025 / Preprint",
+          "reason": "专门评估 audio caption 质量的 benchmark。包含幻觉检测子基准，揭示 CLAPScore 在 caption 评估中的局限性。最佳 CLAP-based 评估仅 70.01 F1，LALM 仅 63.19。"
+        },
+        {
+          "id": "2026-06-08-10-arxiv-org-abs-2606-06907",
+          "top": 10,
+          "title": "SpectCount: Spectrotemporal Counting via Synthetic Signals Improves Large Audio Language Models",
+          "link": "https://arxiv.org/abs/2606.06907",
+          "keywords": "LALM, Synthetic Data, Fine-grained Perception, Data-efficient",
+          "priority": "中",
+          "readingLevel": "收藏",
+          "yearVenue": "2026 / Preprint",
+          "reason": "通过合成信号发现和修复 LALM 的时频感知弱点，无需真实音频或标注。SpectCount 不仅解决观察到的弱点，还在音效/音乐/语音 benchmark 上泛化提升。"
         }
       ]
     }
